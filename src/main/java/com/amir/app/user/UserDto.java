@@ -1,8 +1,10 @@
 package com.amir.app.user;
 
+import java.util.UUID;
+
 public class UserDto {
 	
-	private String id;
+	private UUID id;
 	private String uname;
 	private String passw;
 	private String fname;
@@ -60,12 +62,12 @@ public class UserDto {
 		this.phoneNo = phoneNo;
 	}
 
-	public String getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
-	};
+	}
 	
 }

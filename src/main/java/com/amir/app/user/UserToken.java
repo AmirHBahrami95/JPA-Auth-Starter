@@ -13,17 +13,15 @@ import jakarta.persistence.Version;
 public class UserToken {
 	
 	public static final int TOKEN_LENGTH=16;
-	
-	@Id
-	private String usrUid;
 
-	@MapsId	@OneToOne
-  @JoinColumn(name = "usr_uid")
+	@OneToOne
+  @JoinColumn(referencedColumnName = "uid")
 	private User usr;
 	
-	// TODO change to JWT later, so there's no need for a db + redis mess (or just no db mess)
-	//  @GeneratedValue(strategy = GenerationType.UUID) // cannot use for non-id >:	
-	private String token;
+	// TODO change to JWT later, so there's no need for a db + redis mess (or just no redis mess)
+	// TODO make this guy a UUID too! (if you can give a shit)
+	@Id
+	private String token; 
 	
 	@Version // Add this line for optimistic locking
   private Long version; // or Integer version;
@@ -45,12 +43,5 @@ public class UserToken {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-	public String getUsrUid() {
-		return usrUid;
-	}
-
-	public void setUsrUid(String usrUid) {
-		this.usrUid = usrUid;
-	}
+	
 }

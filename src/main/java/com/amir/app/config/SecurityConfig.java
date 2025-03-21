@@ -19,9 +19,9 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
 	    .authorizeHttpRequests(c -> c
-	    		// .requestMatchers("/api/user/logout").authenticated()
+	    		.requestMatchers("/api/user/logout").authenticated()
 	    		.requestMatchers("/api/user/whoami").authenticated()
-	        // .requestMatchers("/api/user/**").permitAll()
+	        .requestMatchers("/api/user/**").permitAll()
 	        // .requestMatchers("/h2-ui").permitAll()
 	        // .requestMatchers("/actuator/**").permitAll()
 	    		.requestMatchers("/api/user/test/**").authenticated() // TODO @HasRole("ADMIN")

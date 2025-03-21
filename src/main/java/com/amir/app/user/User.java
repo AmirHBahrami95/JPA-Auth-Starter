@@ -3,6 +3,7 @@ package com.amir.app.user;
 import java.util.Collection;
 import java.util.List;
 // import java.util.UUID;
+import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +35,7 @@ public class User implements UserDetails{
 	}
 	
 	@Id	@GeneratedValue(strategy = GenerationType.UUID)	
-	private String uid; // saved as a uuid string
+	private UUID uid; // saved as a uuid string
 	private String passw;
 	
 	@Nullable
@@ -64,7 +65,7 @@ public class User implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return uid;
+		return uid.toString();
 	}
 	
 	public UserDto toDto() {
@@ -77,10 +78,6 @@ public class User implements UserDetails{
 		u.setEmail(this.email);
 		u.setPhoneNo(this.phoneNo);
 		return u;
-	}
-
-	public String getId() {
-		return uid;
 	}
 
 	public String getEmail() {
@@ -105,10 +102,6 @@ public class User implements UserDetails{
 
 	public String getRole() {
 		return role.getRole();
-	}
-
-	public void setId(String id) {
-		this.uid = id;
 	}
 
 	public void setPassw(String passw) {
@@ -137,6 +130,18 @@ public class User implements UserDetails{
 
 	public void setRole(UserRole role) {
 		this.role = role;
+	}
+
+	public UUID getUid() {
+		return uid;
+	}
+
+	public void setUid(UUID uid) {
+		this.uid = uid;
+	}
+
+	public String getPassw() {
+		return passw;
 	}
 
 }

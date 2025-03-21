@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/api/user")
 public class UserController {
+	
+	private final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	private UserService uServ;
@@ -62,12 +67,13 @@ public class UserController {
 		}catch(UsernameNotFoundException unfe) {
 			return ResponseEntity.notFound().build();
 		}catch(Exception e) {
+			logger.error("after login:"+e.getMessage());
 			return ResponseEntity.badRequest().build();
 		}
 	}
 	
 	@GetMapping(path="/{id}",produces="application/json")
-	public ResponseEntity<User> getUserById(@PathVariable("id") String id){
+	public ResponseEntity<User> getUserById(@PathVariable("id") UUID id){
 		Optional<User> u=uServ.findById(id);
 		if(u.isEmpty()) return ResponseEntity.notFound().build();
 		u.get().setPassw(null);
